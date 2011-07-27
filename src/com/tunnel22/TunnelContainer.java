@@ -1,10 +1,24 @@
 package com.tunnel22;
 
 import java.util.HashMap;
+import java.util.Iterator;
+
 import com.jcraft.jsch.Session;
 
 public class TunnelContainer {
 	private HashMap tunnelsMap=new HashMap();
+	
+	public String getKeysString(){
+		String retval="";
+		Iterator it=tunnelsMap.keySet().iterator();
+		while(it.hasNext()){
+			retval=retval+it.next();
+			if(it.hasNext()){
+				retval=retval+"\n";
+			}
+		}
+		return retval;
+	}
 	
 	public boolean openTunnelL(String uname, String rhost, int lport, int rport){
 		//""+host+"|"+uname+"|"+s_port+"|"+d_port+"\n"
@@ -26,6 +40,13 @@ public class TunnelContainer {
 			return true;
 		}
 		return false;
+	}
+
+	public void closeAll(){
+		Iterator it=tunnelsMap.keySet().iterator();
+		while(it.hasNext()){
+			closeTunnel((String)it.next());
+		}
 	}
 	
 	public boolean closeTunnel(String tunnelID){

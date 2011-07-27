@@ -14,6 +14,10 @@ import javax.swing.*;
  */
 public class SSHTunnel {
     private Session session;
+    
+    public static Integer TYPE_L=1;
+    public static Integer TYPE_R=2;
+    
     public Session getSession(){
         return session;
     }
